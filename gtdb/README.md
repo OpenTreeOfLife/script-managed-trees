@@ -42,7 +42,7 @@ In a RefSeq# dir we'll have:
     step
   7. `gtdb_id_to_ott_id_newick.tsv` is an output mapping that has the
   `_` to ` ` replacement of the GTDB labels.
-  8. `mapped_gtdb_rs78.tre` is the output tree with "ott###" as tip labels 
+  8. `mapped_gtdb_rs#.tre` is the output tree with "ott###" as tip labels 
   were the ### correspond to the OTT ID. Unmapped tips (and barren
   internals) will have been pruned.
   9. `err-log-pruning.txt` is the stderr log of that pruning operation.
