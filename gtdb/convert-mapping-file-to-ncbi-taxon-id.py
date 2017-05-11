@@ -2,9 +2,13 @@
 import codecs
 import sys
 import os
+
 script_name = os.path.split(sys.argv[0])[-1]
-def debug(m):
-    sys.stderr.write("{}: {}\n".format(script_name, m))
+
+
+def debug(msg):
+    sys.stderr.write("{}: {}\n".format(script_name, msg))
+
 
 try:
     mapping_file = sys.argv[1]
@@ -12,8 +16,9 @@ try:
     assert os.path.isfile(mapping_file)
     assert os.path.isdir(ncbi_taxonomy_dir)
 except:
-    raise
-    sys.exit("Expecting 2 arguments: the mapping file from GTDB ID to NCBI name and a directory that holds a NCBI taxonomy in Open Tree Interim Taxonomy format")
+    m = "Expecting 2 arguments: the mapping file from GTDB ID to NCBI name and a directory that " \
+        "holds a NCBI taxonomy in Open Tree Interim Taxonomy format"
+    sys.exit(m)
 with codecs.open(mapping_file, 'rU', encoding='utf-8') as minp:
     gtdbid_to_name = {}
     name_to_gtdbids = {}
@@ -31,20 +36,23 @@ with codecs.open(mapping_file, 'rU', encoding='utf-8') as minp:
 
 num_mod_named = 0
 ncbi_name_to_ncbi_tax_id_set = {}
-def process_ncbi_name_id(name, ncbi_id):
+
+
+def process_ncbi_name_id(ncbi_name, ncbi_id):
     global num_mod_named
-    if name in name_to_gtdbids:
-        ncbi_name_to_ncbi_tax_id_set.setdefault(name, set()).add(ncbi_id)
-    elif '=' in name:
-        mod_name = name.replace('=', '/')
+    if ncbi_name in name_to_gtdbids:
+        ncbi_name_to_ncbi_tax_id_set.setdefault(ncbi_name, set()).add(ncbi_id)
+    elif '=' in ncbi_name:
+        mod_name = ncbi_name.replace('=', '/')
         if mod_name in name_to_gtdbids:
-            debug('Found NCBI name by mimicking = to / replacement for {} to {}'.format(repr(name), repr(mod_name)))
+            msg = 'Found NCBI ncbi_name by mimicking = to / replacement for {} to {}'
+            debug(msg.format(repr(ncbi_name), repr(mod_name)))
             num_mod_named += 1
             ncbi_name_to_ncbi_tax_id_set.setdefault(mod_name, set()).add(ncbi_id)
-    elif '(' in name:
-        mod_name = name.split('(')[0].strip()
+    elif '(' in ncbi_name:
+        mod_name = ncbi_name.split('(')[0].strip()
         if mod_name in name_to_gtdbids:
-            debug('Found NCBI name by trimming ( or after  "{}"'.format(name))
+            debug('Found NCBI ncbi_name by trimming ( or after  "{}"'.format(ncbi_name))
             num_mod_named += 1
             ncbi_name_to_ncbi_tax_id_set.setdefault(mod_name, set()).add(ncbi_id)
 
@@ -81,7 +89,6 @@ with codecs.open(forwards_tsv, 'rU', encoding='utf-8') as finp:
             continue
         old_ncbi_to_new[orig] = replacement
 
-
 gtdbid_to_ncbi_taxon_id = {}
 ambig = set()
 num_forwarded = 0
@@ -110,7 +117,8 @@ for k, name in gtdbid_to_name.items():
     if k not in gtdbid_to_ncbi_taxon_id:
         if k not in ambig:
             omitted.add((k, name))
-m = "{} GTDB ids lost in mapping. {} due to ambiguity. {} for failing to find a name match in NCBI. The latter are:\n{}"
+m = "{} GTDB ids lost in mapping. {} due to ambiguity. {} for failing to find a name match in " \
+    "NCBI. The latter are:\n{}"
 x = '\n'.join(['{} -> "{}"'.format(i[0], i[1]) for i in omitted])
 debug(m.format(len(ambig) + len(omitted), len(ambig), len(omitted), x))
 out = sys.stdout
@@ -119,4 +127,3 @@ klist.sort()
 
 for k in klist:
     out.write('{}\t{}\n'.format(k, gtdbid_to_ncbi_taxon_id[k]))
-

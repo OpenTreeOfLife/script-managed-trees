@@ -2,9 +2,13 @@
 import codecs
 import sys
 import os
+
 script_name = os.path.split(sys.argv[0])[-1]
-def debug(m):
-    sys.stderr.write("{}: {}\n".format(script_name, m))
+
+
+def debug(msg):
+    sys.stderr.write("{}: {}\n".format(script_name, msg))
+
 
 try:
     to_ncbi_mapping_file = sys.argv[1]
@@ -12,8 +16,9 @@ try:
     assert os.path.isfile(to_ncbi_mapping_file)
     assert os.path.isdir(ott_dir)
 except:
-    raise
-    sys.exit("Expecting 2 arguments: the mapping file from GTDB ID to NCBI ID and a directory for OTT")
+    m = "Expecting 2 arguments: the mapping file from GTDB ID to NCBI ID and a directory for OTT"
+    sys.exit(m)
+
 with codecs.open(to_ncbi_mapping_file, 'rU', encoding='utf-8') as minp:
     gtdbid_to_ncbi_taxon_id = {}
     ncbi_id_to_gtdbid_list = {}
@@ -27,10 +32,13 @@ with codecs.open(to_ncbi_mapping_file, 'rU', encoding='utf-8') as minp:
             sys.exit("Expecting 1 tab in a  non-empty line. Found:\n{}".format(line))
         gtdbid_to_ncbi_taxon_id[gtdbid] = ncbi_taxon_id
         ncbi_id_to_gtdbid_list.setdefault(ncbi_taxon_id, []).append(gtdbid)
-    debug("{} NCBI IDs, {} gtdb IDs".format(len(ncbi_id_to_gtdbid_list), len(gtdbid_to_ncbi_taxon_id)))
+    debug("{} NCBI IDs, {} gtdb IDs".format(len(ncbi_id_to_gtdbid_list),
+                                            len(gtdbid_to_ncbi_taxon_id)))
 
 ncbi_id_to_ott_id = {}
 ott_id_seen = set()
+
+
 def process_ott_src_info(src_info, ott_id):
     src_list = src_info.split(',')
     for s in src_list:
@@ -79,7 +87,6 @@ with codecs.open(forwards_tsv, 'rU', encoding='utf-8') as finp:
         if orig in ott_id_seen:
             old_ott_to_new[orig] = replacement
 
-
 gtdbid_to_ott_id = {}
 ambig = set()
 num_forwarded = 0
@@ -108,7 +115,8 @@ for k, ncbi_id_list in gtdbid_to_ncbi_taxon_id.items():
     if k not in gtdbid_to_ott_id:
         if k not in ambig:
             omitted.add((k, ncbi_id_list))
-m = "{} GTDB ids lost in mapping. {} due to ambiguity. {} for failing to find NCBI ID match in OTT. The latter are:\n{}"
+m = "{} GTDB ids lost in mapping. {} due to ambiguity. {} for failing to find NCBI ID match in " \
+    "OTT. The latter are:\n{}"
 x = '\n'.join(['{} -> "{}"'.format(i[0], i[1]) for i in omitted])
 debug(m.format(len(ambig) + len(omitted), len(ambig), len(omitted), x))
 out = sys.stdout
@@ -117,4 +125,3 @@ klist.sort()
 
 for k in klist:
     out.write('{}\t{}\n'.format(k, gtdbid_to_ott_id[k]))
-
