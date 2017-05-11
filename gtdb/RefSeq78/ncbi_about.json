@@ -1,0 +1,9 @@
+{
+  "description": "NCBI Taxonomy", 
+  "prefix": "ncbi", 
+  "prefixDefinition": "http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=", 
+  "source": {
+    "URL": "http://files.opentreeoflife.org/ncbi/ncbi-20161109/ncbi-20161109.tgz", 
+    "date": "2016-11-09T15:20:06"
+  }
+}

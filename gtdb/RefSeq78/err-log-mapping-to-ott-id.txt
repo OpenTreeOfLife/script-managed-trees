@@ -1,7 +1,7 @@
-convert-ncbi-to-ott-id.py: 13180 NCBI IDs, 14690 gtdb IDs
-convert-ncbi-to-ott-id.py: 13180 NCBI IDs found in ../../ott/ott3.0draft6/taxonomy.tsv
+convert-ncbi-to-ott-id.py: 0 NCBI IDs, 0 gtdb IDs
+convert-ncbi-to-ott-id.py: 0 NCBI IDs found in ../../ott/ott3.0draft6/taxonomy.tsv
 convert-ncbi-to-ott-id.py: 0 NCBI IDs found in ../../ott/ott3.0draft6/synonyms.tsv
 convert-ncbi-to-ott-id.py: 0 OTT IDs had to be forwarded
-convert-ncbi-to-ott-id.py: 14690 GTDB IDs mapped unambiguously to an OTT ID
+convert-ncbi-to-ott-id.py: 0 GTDB IDs mapped unambiguously to an OTT ID
 convert-ncbi-to-ott-id.py: 0 GTDB ids lost in mapping. 0 due to ambiguity. 0 for failing to find NCBI ID match in OTT. The latter are:
 
