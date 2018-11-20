@@ -26,14 +26,14 @@ Lots todo..
      * Lets use the mrcaottXottY format to add node labels that would persist better.
 
   5. So: extend nexson format
-    * Remove: otusByID.
-    * Keep: treesById
-      * Remove treesById[groupname]["@otus"],
-      * Remove treesById[groupname]["^otTreeElementOrder"],
-      * Keep   treesById[groupname]["treeByID"][treename]     
-      * Add    treesById[groupname]["treeByID"][treename]["external-data"] = {"url":url, "format":format}
-      * Remove treesById[groupname]["treeByID"][treename]["edgeBySourceId"]
-      * Remove treesById[groupname]["treeByID"][treename]["nodeById"]
+     * Remove: otusByID.
+     * Keep: treesById
+        * Remove treesById[groupname]["@otus"],
+        * Remove treesById[groupname]["^otTreeElementOrder"],
+        * Keep   treesById[groupname]["treeByID"][treename]     
+        * Add    treesById[groupname]["treeByID"][treename]["external-data"] = {"url":url, "format":format}
+        * Remove treesById[groupname]["treeByID"][treename]["edgeBySourceId"]
+        * Remove treesById[groupname]["treeByID"][treename]["nodeById"]
 
   6. Modifying downstream consumers:
   
