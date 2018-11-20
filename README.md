@@ -36,6 +36,7 @@ Lots todo..
       * Remove treesById[groupname]["treeByID"][treename]["nodeById"]
 
   6. Modifying downstream consumers:
+  
     1. propinquity
        * We might need a SHA for the downloaded file.  We could replace the format SHA with the formath SHA_SHA_DATE, but just for external trees.
     2. ws_wrapper: currently uses PhyloSchema( ) to get newick from nexson
