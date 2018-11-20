@@ -10,17 +10,21 @@ This directory is intended to hold large trees that are input to synthesis but a
 Lots todo..
 
   1. We probably want to create a phylesystem stub for each of these resources so that they:
-    1. are more visible to users,
-    2. can be ranked using the collections mechanism,
-    3. can be indexed by OTI.
-    4. can have their citations managed in a non ad hoc manner.
+
+     1. are more visible to users,
+     2. can be ranked using the collections mechanism,
+     3. can be indexed by OTI.
+     4. can have their citations managed in a non ad hoc manner.
+
   2. We need to figure out where we will clone this repo on https://files.opentreeoflife.org
   3. Perhaps rethink this strategy of managing the files in a big git repo.
   4. External format: currently newick with tip labels all like ott<num>.
-    * We need node labels for running conflict, in addition to other reasons.
-    * We _could_ make the conflict service add these labels where they are missing.  Maybe with a flag like "generate_node_names": true
-    * However, if these node labels are not persistent that could be a problem.
-    * Lets use the mrcaottXottY format to add node labels that would persist better.
+
+     * We need node labels for running conflict, in addition to other reasons.
+     * We _could_ make the conflict service add these labels where they are missing.  Maybe with a flag like "generate_node_names": true
+     * However, if these node labels are not persistent that could be a problem.
+     * Lets use the mrcaottXottY format to add node labels that would persist better.
+
   5. So: extend nexson format
     * Remove: otusByID.
     * Keep: treesById
