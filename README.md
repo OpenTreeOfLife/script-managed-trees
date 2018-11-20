@@ -37,17 +37,17 @@ Lots todo..
 
   6. Modifying downstream consumers:
   
-    1. propinquity
-       * We might need a SHA for the downloaded file.  We could replace the format SHA with the formath SHA_SHA_DATE, but just for external trees.
-    2. ws_wrapper: currently uses PhyloSchema( ) to get newick from nexson
-       * Maybe add a more general function to get a tree from a nexson?
-    3. curator:
-       * Can we edit extended files to e.g. add DOI, citation?
-         * Depends if the curator preserves fields that it does not understand.
-         * We could make it understand the "^ot:external_tree" field.
-       * Disable functionality: mapping, viewing (?)
-       * Enable  functionality: 
-    4. peyotl:
-       * What functions to modify in peyotl?
-       * Can we get some of the functionality transparently by making peyotl functions handle external trees?
+     1. propinquity
+        * We might need a SHA for the downloaded file.  We could replace the format SHA with the formath SHA_SHA_DATE, but just for external trees.
+     2. ws_wrapper: currently uses PhyloSchema( ) to get newick from nexson
+        * Maybe add a more general function to get a tree from a nexson?
+     3. curator:
+        * Can we edit extended files to e.g. add DOI, citation?
+           * Depends if the curator preserves fields that it does not understand.
+           * We could make it understand the "^ot:external_tree" field.
+        * Disable functionality: mapping, viewing (?)
+        * Enable  functionality: 
+     4. peyotl:
+        * What functions to modify in peyotl?
+        * Can we get some of the functionality transparently by making peyotl functions handle external trees?
 
