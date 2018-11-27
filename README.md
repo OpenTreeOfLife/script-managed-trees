@@ -1,4 +1,8 @@
 # Open Tree of Life script-managed trees
+
+Goal: Help people contribute trees that are too large to work with in the curator.  We also want to be a to receive periodic updates to these trees.
+Strategy: maybe have external trees?
+
 This directory is intended to hold large trees that are input to synthesis but are not
     in phylesystem because:
   1. Their large size makes manual curation in the curator app infeasible,
