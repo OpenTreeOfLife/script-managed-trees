@@ -1,0 +1,1 @@
+1	gtdb/RefSeq78/mapped_gtdb_rs78.tre
